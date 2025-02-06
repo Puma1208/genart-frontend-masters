@@ -54,7 +54,6 @@ const sketch = () => {
                 rotation
             } = data;
             const [u, v] = position;
-            // Start again from here
             const x = lerp(margin, width-margin, u);
             const y = lerp(margin, height-margin, v);
 

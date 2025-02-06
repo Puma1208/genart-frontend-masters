@@ -60,6 +60,9 @@ const sketch = () => {
             const y2 = lerp(margin, height-margin, point2.position[1]);
             context.beginPath();
             context.arc(x1, y1, radius*width, 0, Math.PI*2, false);
+            context.fillStyle = 'blue';
+            context.fill();
+            context.beginPath()
             context.arc(x2, y2, radius*width, 0, Math.PI*2, false);
             context.fillStyle = 'red';
             context.fill();
@@ -68,10 +71,14 @@ const sketch = () => {
             
             context.moveTo(x1, y1);
             context.lineTo(x2, y2);
-            context.strokeStyle = 'red';
-            context.lineWidth = 5;
-            context.moveTo(lerp(margin, width-margin, point1.position[0]), lerp(margin, width-margin, 1));
+            // context.moveTo(lerp(margin, width-margin, point1.position[0]), lerp(margin, width-margin, 1));
             context.lineTo(lerp(margin, width-margin, point2.position[0]), lerp(margin, width-margin, 1));
+            context.strokeStyle = 'gray';
+            context.lineWidth = 5;
+            context.stroke();
+            context.lineTo(lerp(margin, width-margin, point1.position[0]), lerp(margin, width-margin, 1));
+            context.lineTo(x1, y1);
+            // context.lineTo(lerp(margin, width-margin, x1), lerp(margin, width-margin, y1));
             // context.fillStyle = 'red';
             // context.fill()
             // context.lineTo(lerp(margin, width-margin, point4[0]), lerp(margin, height-margin, point4[1]));

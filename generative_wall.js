@@ -5,10 +5,10 @@ const palettes = require('nice-color-palettes');
 
 
 const settings = {
-  dimensions: [ 2048, 2048 ]
+  dimensions: [ 2048, 2048 ],
 };
 
-const sketch = ({width, height}) => {
+const sketch = () => {
 
     const createTrapezoids = (gridCount) =>{
         var trapezoids = [];
@@ -76,16 +76,16 @@ const sketch = ({width, height}) => {
     };
 
 
-    const background_color = 'white';
-    const gridCount = 5;
-    const margin = width*.1;
+    const background_color = 'black';
+    const gridCount = 4;
     
-    const colorCount = random.rangeFloor(6, 13);
+    const colorCount = random.rangeFloor(4, 5);
     const palette = random.shuffle(random.pick(palettes)).slice(0, colorCount);
     // random.setSeed(42);
-
-
+    
+    
     return ({context, width, height}) => {
+        const margin = width*.1;
         context.fillStyle = background_color;
         context.fillRect(0, 0, width, height);
         const trapezoids = createTrapezoids(gridCount);
@@ -106,7 +106,7 @@ const sketch = ({width, height}) => {
             
             
             const color = random.pick(palette);
-            context.globalAlpha = 0.5;
+            context.globalAlpha = .5;
             context.fillStyle = color;
             context.fill();
 

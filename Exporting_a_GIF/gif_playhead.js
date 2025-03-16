@@ -47,16 +47,33 @@ const sketch = ({ context }) => {
   const palette = random.pick(palettes);
   // Setup a geometry
   const geometry = new THREE.BoxGeometry(1, 1, 1);
-  for (let i=0;i<100;i++){
+  const fragmentShader = /*glsl*/ ` 
+    varying vec2 vUv;
+    void main() {
+      vec3 color = vec3(1.0);
+      gl_FragColor = vec4(.0, .0, vUv.x, 1.);
+  }`;
+  const vertexShader = /*glsl*/ ` 
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position.xyz, 1.);
+  }`;
 
-    // Setup a material
-    // const material = new THREE.MeshPhysicalMaterial({
-    const material = new THREE.MeshStandardMaterial({
+
+  for (let i=0;i<100;i++){
+    const material = new THREE.ShaderMaterial({
+      fragmentShader, 
+      vertexShader,
       color: random.pick(palette),
       // wireframe: true
     //   flatshading:true,
       // roughness:.5
     });
+
+    // Setup a material
+    // const material = new THREE.MeshPhysicalMaterial({
+    
 
     // Setup a mesh with geometry + material 
     const mesh = new THREE.Mesh(geometry, material);

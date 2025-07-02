@@ -36,12 +36,19 @@ const sketch = () => {
 
         var pointPairs = [];
         while (valid_points.length>=1){
+            if (valid_points.length < 2) break;
+
             const point_1 = random.pick(valid_points);
             valid_points.splice(valid_points.indexOf(point_1), 1);
             
             let point_2 = random.pick(valid_points);
-            while (point_2.u==point_1.u){
+            let attempts = 0;
+            while (point_2.u==point_1.u && attempts<=10){
                 point_2 = random.pick(valid_points);
+                attempts+=1;
+                if ( attempts>10){
+                    break;
+                }
             }
             valid_points.splice(valid_points.indexOf(point_2), 1);
 
@@ -76,8 +83,9 @@ const sketch = () => {
     };
 
 
-    const background_color = 'black';
-    const gridCount = 4;
+    const background_color = 'hsl(0, 0%, 95%)';
+    // const background_color = 'black';
+    const gridCount = 5;
     
     const colorCount = random.rangeFloor(4, 5);
     const palette = random.shuffle(random.pick(palettes)).slice(0, colorCount);
@@ -110,9 +118,7 @@ const sketch = () => {
             context.fillStyle = color;
             context.fill();
 
-            
-            context.fillStyle = color;
-            context.fill();
+
             context.lineWidth = 16;
             context.closePath();
             context.strokeStyle = background_color;
